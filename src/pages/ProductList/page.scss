@@ -1,0 +1,32 @@
+.pagination {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  min-width: 200px;
+  height: 60px;
+  border-radius: 9px;
+  overflow: hidden;
+
+  .page-nav-button {
+    border: none;
+    outline: none;
+    stroke: none;
+    box-shadow: none;
+    cursor: pointer;
+    border-radius: 9px;
+    // background: grey;
+    width: 36px;
+    height: 36px;
+    background: black;
+    color: white;
+
+    &:disabled,
+    &[disabled] {
+      background-color: #cccccc;
+      color: #666666;
+    }
+  }
+}

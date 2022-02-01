@@ -118,3 +118,26 @@ export const filterProductByType =
       });
     } catch (error) {}
   };
+
+export const sortProducts = (type: string) => {
+  return (dispatch: Dispatch, getState: () => StoreState) => {
+    const {
+      products: { products },
+    } = getState();
+
+    if (type === "asc") {
+      products.sort((a: any, b: any) => {
+        return a.rating - b.rating;
+      });
+    } else {
+      products.sort((a: any, b: any) => {
+        return b.rating - a.rating;
+      });
+    }
+
+    dispatch<fetchFilteredProductsAction>({
+      type: ActionTypes.fetchFilteredProducts,
+      payload: products,
+    });
+  };
+};

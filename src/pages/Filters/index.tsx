@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Multiselect from "multiselect-react-dropdown";
 import {
   filterProductByBrand,
+  sortProducts,
   filterProductByType,
 } from "../../state-manager/actions/fetchProducts";
 import { StoreState } from "../../state-manager/reducers";
@@ -13,6 +14,18 @@ const Filters = () => {
   const { brands, types } = useSelector((state: StoreState) => state.products);
   const [brand, setBrand] = React.useState([]);
   const [productType, setProductType] = React.useState([]);
+
+  const [sortBy, setSortBy] = React.useState("desc");
+
+  const handleSort = () => {
+    if (sortBy === "asc") {
+      setSortBy("desc");
+      dispatch(sortProducts("desc"));
+    } else {
+      setSortBy("asc");
+      dispatch(sortProducts("asc"));
+    }
+  };
 
   const handleChange = (selectedList: any) => {
     setBrand(selectedList);
@@ -58,6 +71,21 @@ const Filters = () => {
           showCheckbox
           keepSearchTerm={false}
         />
+      </div>
+      <div className="filter-items">
+        <h3 style={{ margin: "8px 0px" }}>
+          <span style={{ padding: "0px 12px" }}>Sort</span>
+          <button onClick={handleSort}>
+            {sortBy === "asc" ? (
+              <i className="fas fa-long-arrow-up"></i>
+            ) : (
+              <i className="fas fa-long-arrow-down"></i>
+            )}
+          </button>
+        </h3>
+        <div>
+          Rating (<i className="fas fa-funnel-dollar"></i>)
+        </div>
       </div>
     </div>
   );
